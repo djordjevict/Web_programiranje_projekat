@@ -1,0 +1,111 @@
+--create table [#tempMusterija] (
+--[ID] [int] identity,
+--[Ime] [nvarchar] (20),
+--[Prezime] [nvarchar] (30));
+
+
+
+set identity_insert [#tempMusterija] on;
+
+
+insert [#tempMusterija] ([ID],[Ime],[Prezime])
+select 1,N'Teodora',N'Djordjevic' UNION ALL
+select 11,N'Vanja',N'Djordjevic' UNION ALL
+select 12,N'Ana',N'Djordjevic' UNION ALL
+select 10079,N'Jelena',N'Peric' UNION ALL
+select 10080,N'Petar',N'Peric' UNION ALL
+select 10081,N'Milica',N'Ilic' UNION ALL
+select 10082,N'Tea',N'Ivic' UNION ALL
+select 10083,N'Jelena',N'Pesic' UNION ALL
+select 10084,N'Tea',N'Ilic';
+
+set identity_insert [#tempMusterija] off;
+
+----------------------------------------------------------
+
+--create table [#tempRadnik] (
+--[ID] [int] identity,
+--[Ime] [nvarchar] (20),
+--[Zanimanje] [nvarchar] (max),
+--[SalonID] [int] NULL);
+
+
+
+set identity_insert [#tempRadnik] on;
+
+
+insert [#tempRadnik] ([ID],[Ime],[Zanimanje],[SalonID])
+select 1,N'Nevena',N'sminker',1 UNION ALL
+select 2,N'Milica',N'frizer',2 UNION ALL
+select 3,N'Anita',N'frizer',1;
+
+set identity_insert [#tempRadnik] off;
+
+------------------------------------------------------------
+
+--create table [#tempSalon] (
+--[ID] [int] identity,
+--[Naziv] [nvarchar] (50),
+--[Adresa] [nvarchar] (max));
+
+
+
+set identity_insert [#tempSalon] on;
+
+
+insert [#tempSalon] ([ID],[Naziv],[Adresa])
+select 1,N'Medeja',N'Tome Rosandića 6, Niš' UNION ALL
+select 2,N'Miracle',N'Trg Kralja Aleksandra Ujedinitelja 2/7, Niš';
+
+set identity_insert [#tempSalon] off;
+
+-----------------------------------------------------------
+
+--create table [#tempTermin] (
+--[ID] [int] identity,
+--[Dan] [nvarchar] (max),
+--[Vreme] [nvarchar] (max),
+--[musterijaID] [int] NULL,
+--[uslugaID] [int] NULL,
+--[radnikID] [int] NULL);
+
+
+
+set identity_insert [#tempTermin] on;
+
+
+insert [#tempTermin] ([ID],[Dan],[Vreme],[musterijaID],[uslugaID],[radnikID])
+select 1,N'Ponedeljak',N'10:00',1,4,2 UNION ALL
+select 3,N'Petak',N'12:00',1,3,1 UNION ALL
+select 3006,N'Ponedeljak',N'12:00',10079,2,3 UNION ALL
+select 3008,N'Petak',N'18:00',10079,2,2 UNION ALL
+select 3011,N'Ponedeljak',N'10:00',10081,4,1 UNION ALL
+select 3013,N'Sreda',N'12:00',10081,1,2 UNION ALL
+select 4017,N'Sreda',N'12:00',10084,2,1 UNION ALL
+select 4019,N'Cetvrtak',N'18:00',10084,1,1 UNION ALL
+select 5021,N'Petak',N'10:00',11,2,2 UNION ALL
+select 5022,N'Subota',N'10:00',11,1,1 UNION ALL
+select 5023,N'Utorak',N'16:00',10082,3,2 UNION ALL
+select 5026,N'Ponedeljak',N'12:00',10082,3,1;
+
+set identity_insert [#tempTermin] off;
+
+--------------------------------------------------------------------------
+
+--create table [#tempUsluga] (
+--[ID] [int] identity,
+--[TipUsluge] [nvarchar] (max));
+
+
+
+set identity_insert [#tempUsluga] on;
+
+
+insert [#tempUsluga] ([ID],[TipUsluge])
+select 1,N'Pravljenje frizure' UNION ALL
+select 2,N'Sisanje' UNION ALL
+select 3,N'Sminkanje' UNION ALL
+select 4,N'Tretman lica' UNION ALL
+select 5,N'Masaza';
+
+set identity_insert [#tempUsluga] off;
